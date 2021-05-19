@@ -3,13 +3,13 @@
     "silent": true
   },
   "redirects": [
-    { "source": "/index.js", "destination": "/vsh.js" },
-    { "source": "/", "destination": "/vsh.js" }
+    { "source": "/index.js", "destination": "/vitals.js" },
+    { "source": "/", "destination": "/vitals.js" }
   ],
-  "rewrites": [{ "source": "/vsh.js", "destination": "/index.js" }],
+  "rewrites": [{ "source": "/vitals.js", "destination": "/index.js" }],
   "headers": [
     {
-      "source": "/vsh.js",
+      "source": "/vitals.js",
       "headers": [
         {
           "key": "Content-Type",
