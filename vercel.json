@@ -3,6 +3,7 @@
     "silent": true
   },
   "redirects": [
+    { "source": "/index.js", "destination": "/vitals.js" },
     { "source": "/", "destination": "/vitals.js" }
   ],
   "rewrites": [{ "source": "/vitals.js", "destination": "/index.js" }],
