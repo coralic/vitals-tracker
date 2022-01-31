@@ -2,7 +2,7 @@ import { getCLS, getFCP, getFID, getLCP, getTTFB } from 'web-vitals'
 import { Metric } from 'types'
 let registered = false
 
-const vitalsUrl = 'https://dev.vitals.sh/api/report'
+const vitalsUrl = 'http://vitals.sh/api/report'
 
 const getPath = (el: Element) => {
   if (!(el instanceof Element)) return
