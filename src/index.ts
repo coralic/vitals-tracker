@@ -1,47 +1,15 @@
 import { getCLS, getFCP, getFID, getLCP, getTTFB } from 'web-vitals'
+import { finder } from '@medv/finder'
 import { Metric } from 'types'
 let registered = false
 
 const vitalsUrl = 'https://vitals.sh/api/report'
 
-const getPath = (el: Element) => {
-  if (!(el instanceof Element)) return
-  let path = []
-
-  while (el.nodeType === Node.ELEMENT_NODE) {
-    let selector = el.nodeName.toLowerCase()
-    if (el.id) {
-      // if element has an id, use it instead because of its uniqueness
-      selector += '#' + el.id
-      path.unshift(selector)
-      break
-    } else {
-      let sibling = el,
-        nth = 1
-
-      // loop through siblings with same properties to get nth element
-      while (
-        sibling.previousElementSibling &&
-        (sibling = sibling.previousElementSibling)
-      ) {
-        if (sibling.nodeName.toLowerCase() == selector) nth++
-      }
-
-      if (nth != 1) selector += ':nth-of-type(' + nth + ')'
-    }
-
-    path.unshift(selector)
-    el.parentNode instanceof Element && (el = el.parentNode)
-  }
-
-  return path.join(' > ')
-}
-
 export const reportMetric = (metric: Metric, siteId: string) => {
   const elements = []
   if (metric.name === 'LCP') {
     elements.push({
-      element: getPath(metric.entries[0].element),
+      element: finder(metric.entries[0].element),
       value: metric.value,
     })
   }
@@ -49,7 +17,7 @@ export const reportMetric = (metric: Metric, siteId: string) => {
     metric.entries.forEach((entry) => {
       entry.sources.forEach((element: any) => {
         elements.push({
-          element: getPath(element.node),
+          element: finder(element.node),
           value: entry.value,
         })
       })
